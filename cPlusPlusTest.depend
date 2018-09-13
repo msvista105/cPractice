@@ -1,0 +1,15 @@
+# depslib dependency file v1.0
+1536650118 source:d:\20180305_newcomputer\code\c_cpp\cplusplustest\main.cpp
+	<iostream>
+	<string>
+	<vector>
+	<stdio.h>
+	"screen_ui.h"
+
+1536650169 source:d:\20180305_newcomputer\code\c_cpp\cplusplustest\src\screen_ui.cpp
+	<stdio.h>
+	<iostream>
+	"screen_ui.h"
+
+1536649977 d:\20180305_newcomputer\code\c_cpp\cplusplustest\include\screen_ui.h
+
