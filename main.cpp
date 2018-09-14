@@ -4,6 +4,7 @@
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "screen_ui.h"
 
@@ -24,7 +25,7 @@ void *new_thread_test(void *args){
         cout<<"create cpp_text error" << endl;
         return NULL;
     }
-    size_t len = fwrite(buffer,sizeof(buffer),1,file);
+    size_t len = fwrite(buffer,sizeof(char),strlen(buffer),file);
     cout<<"---- len " << len << " ----" << endl;
     return NULL;
 }
@@ -50,7 +51,7 @@ int main()
     pthread_t th;
     int thread_num = 9;
     //线程
-    //pthread_create(&th,NULL,new_thread_test,&thread_num);
+    pthread_create(&th,NULL,new_thread_test,&thread_num);
     cout << "Hello world!" << endl;
     screen_ui ui(6);
     ui.show_ui();
@@ -62,7 +63,30 @@ int main()
 
     cout<<"int_array[2]:"<< *(p+1) << "  sizeof int:" << sizeof(int) << " int_array.size:" << sizeof(int_array)/sizeof(int) <<endl;
 
-    cout<< int_array[4] << endl;
+    /**< 常量指针 */
+    int *const p_const = int_array;
+    cout << "p_const:" << *(p_const+2) << endl;
+    /**< 指向常量的指针 */
+    int const_int = 200;
+    int const_int_2 = 300;
+    const int *p_const_int = &const_int;
+    p_const_int = &const_int_2;
+    cout<< "p_const_int:" << *p_const_int << endl;
+
+    /**< 输入赋值 */
+    //char *cmd ;
+    //int cmd_signal ;
+    //scanf("%s%d",cmd,&cmd_signal);
+    //printf("cmd is %s, cmd_signal is %d",cmd,cmd_signal);
+
+    /**< 终止程序 */
+    //terminate();
+
+    /**< 拼接字符串和数字,格式化字符串输出 */
+    //char *append_integer = "hello";
+    char append_integer[30];
+    sprintf(append_integer,"append_integer_sp%d",10);
+    cout << "append_integer is " << append_integer << " strlen:" << strlen(append_integer) <<endl;
 
     return 0;
 }
