@@ -1,6 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
+#include <limits>
 #include <stdio.h>
 #include <unistd.h>
 #include <stdlib.h>
@@ -48,9 +49,10 @@ int main()
     for(vector<string>::iterator it = str_vector.begin();it != str_vector.end();it++){
         cout<<" iterator:"<<*it<<endl;
     }
+    ///-------------------------------------///
     pthread_t th;
     int thread_num = 9;
-    //线程
+    /**< 线程 */
     pthread_create(&th,NULL,new_thread_test,&thread_num);
     cout << "Hello world!" << endl;
     screen_ui ui(6);
@@ -63,6 +65,7 @@ int main()
 
     cout<<"int_array[2]:"<< *(p+1) << "  sizeof int:" << sizeof(int) << " int_array.size:" << sizeof(int_array)/sizeof(int) <<endl;
 
+    ///-------------------------------------///
     /**< 常量指针 */
     int *const p_const = int_array;
     cout << "p_const:" << *(p_const+2) << endl;
@@ -73,20 +76,43 @@ int main()
     p_const_int = &const_int_2;
     cout<< "p_const_int:" << *p_const_int << endl;
 
+    ///-------------------------------------///
     /**< 输入赋值 */
     //char *cmd ;
     //int cmd_signal ;
     //scanf("%s%d",cmd,&cmd_signal);
     //printf("cmd is %s, cmd_signal is %d",cmd,cmd_signal);
 
+    ///-------------------------------------///
     /**< 终止程序 */
     //terminate();
 
+    ///-------------------------------------///
     /**< 拼接字符串和数字,格式化字符串输出 */
     //char *append_integer = "hello";
     char append_integer[30];
     sprintf(append_integer,"append_integer_sp%d",10);
     cout << "append_integer is " << append_integer << " strlen:" << strlen(append_integer) <<endl;
+
+    ///-------------------------------------///
+    /**< goto 测试*/
+    for(int i=0;i<5;i++){
+        for(int j=0;j<5;j++){
+            cout << "---- goto i:" << i << " j:" << j << endl;
+            if(i == 2 && j == 2){
+                break;
+            }
+            if(i == 3 && j == 2){
+                goto _out_for;
+            }
+        }
+    }
+    _out_for:
+        cout << " _out_for " << endl;
+
+    ///-------------------------------------///
+    /**< int 所占字节数，以及int最大最小值 */
+    cout << "int :\t" << sizeof(int) << "\t min:" << numeric_limits<int>::min() << "\t max:" << numeric_limits<int>::max();
 
     return 0;
 }
