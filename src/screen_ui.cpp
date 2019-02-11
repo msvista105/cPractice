@@ -37,6 +37,9 @@ screen_ui::overlay_background(string path){
     }
     return 1;
 }
+void screen_ui::print(string msg){
+    cout << msg << endl;
+}
 void screen_ui::set_tag(string t){
     tag = t;
 }

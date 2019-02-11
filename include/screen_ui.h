@@ -16,6 +16,7 @@ class screen_ui
         int show_ui();
         int overlay_background(std::string path);
         void set_tag(std::string tag);
+        static void print(std::string msg);
     protected:
         int calculate_position();
 

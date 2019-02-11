@@ -14,6 +14,8 @@
 using namespace std;
 
 const string str_x_name = "hello" "world";
+const char* SAVED_FILE = "record";
+const char* ERRO = "Error !!!";
 
 int item_num = 5;
 screen_ui ui(6);///全局变量
@@ -58,6 +60,10 @@ void *new_thread_test(void *args){
 
 void my_terminate_handle(){
     cout << "---- Exception !! quit !! ----" << endl;
+    FILE* fp = fopen(SAVED_FILE, "w");
+    fwrite(ERRO,sizeof(char),strlen(ERRO),fp);
+    fflush(fp);
+    fclose(fp);
     exit(1);
 }
 
@@ -176,8 +182,42 @@ int main()
     cout << " the pid is " << pid << endl; */
 
 
+    /**< atoi 将ascii转成integer */
+    int atoi_num = atoi("123459.87");
+    cout << "atoi_num is " << atoi_num << endl;
+
+    /**< 抛异常,捕获异常 */
+    try{
+        throw 13456;
+    }catch(...){
+        cout << "excepion !!!" << endl;
+    }
+
+    cout << "uint16_t.sizeof() is " << sizeof(uint16_t) << endl;
+
+    //puts("------------------00000000--------------------");
+
+
+    /**< 指针的指针 */
+    char* char_ptr[] = {"aaa","bbb"} ;
+    char char_array[50][50] = {"ab","cd"};
+    vector<std::string> vector_str;
+    vector_str.push_back("hmct-1");
+    vector_str.push_back("hmct-2");
+    int count = vector_str.size();
+    char** char_ptr_ = (char**)malloc(count*sizeof(char*));
+    for(int i=0;i<count;i++){
+        char_ptr_[i] = (char*)malloc(strlen(vector_str[i].c_str()) * sizeof(char));
+        strcpy(char_ptr_[i],vector_str[i].c_str());
+    }
+
+    screen_ui::print("-----------static method-----------------");
+
+
+
     ///-------------------------------------///
     /**< 线程 */
+    /*
     ui.set_tag("1111");
     thread_args args;
     args.pic_num = 10;
@@ -187,6 +227,21 @@ int main()
     ///int thread_num = 9;
     ///pthread_create(&th,NULL,new_thread_test,&args);
     pthread_create(&th,NULL,wait_for_corrupt,NULL);
+    */
+
+
+    screen_ui::print("----------- string test -----------------");
+    std::string ori_str("nihao");
+    std::string f_name(ori_str);
+    f_name.append("-- ok");
+    printf("---- f_name : %s ---- \n",f_name.c_str());
+    printf("---- f_name 2 : %s ---- \n",ori_str.c_str());
+
+    //Error test !!!!!
+    //char ss[5];
+    //strcpy(ss,ERRO);
+
+
 
 
 
